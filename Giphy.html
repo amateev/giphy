@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    var api = " https://api.giphy.com ";
+    //key were generated for this project on giphy.com
+    var path = "/v1/gifs/search? ";
+    var api_key = "&api_key=D0USeq9Efms0OBCTkJKHV8Api2PmMhPJ "
+    //example of query = "&q=cats "
+    var query = " ";
+    var queryURL = api + path + api_key + query;
+    var limit = 10;
+    var rating;
+
+
+    //jquery method, but we do not selecting anythig here
+    $.ajax({                     
+      url: queryURL,
+      method: "GET "
+    }).then(function(response) {               //promice
+      console.log(response);                   //entire object comes back
+      console.log(response.Runtime);           //Runtime is a key from object: 88 min
+    });
+
+
+
+
+</script>
+
+</body>
+
+</html>
