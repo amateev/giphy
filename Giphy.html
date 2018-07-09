@@ -2,40 +2,94 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Giphy</title>
 </head>
 
 <body>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript">
-    var api = " https://api.giphy.com ";
+  <form>
+    <input type = "text">
+    <button class = "userInput">add your animals</button>
+  </form>
+  <br>
+  <div class = "topics">
+  </div>
+  <img class = "image">
+
+
+  <!-- jquery link -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- jquery code -->
+  <script type="text/javascript">
+
+    //creating animal(topics) buttons by looping the topics over:
+    var topics = ['bears', 'cats', 'dogs', 'horses'];
+    for (var i = 0; i < topics.length; i++) {
+
+      var button = $('<button>');                     //new button
+      var buttonText = button.addClass(topics[i]).text(topics[i]);        //text on the button
+      $('.topics').append(buttonText);                //appending new button to div 'topics'
+    }
+    //onclick function creats a new button with a user input as a text
+    $('.userInput').on('click', function () {
+      event.preventDefault();
+      var userInput = $('input').val();               //put user input value into a variable
+      topics.push(userInput);                         //push userInput to the array of topics
+      var newButton = $("<button>").addClass(userInput).text(userInput);  //create a new button with a userInput text
+      $('.topics').append(newButton);                 //append the button to the div 'topics'
+      //clear the input field
+      $('input').val(' ');
+
+    })
+
+    $('input').val = "";
+
+
+
     //key were generated for this project on giphy.com
-    var path = "/v1/gifs/search? ";
-    var api_key = "&api_key=D0USeq9Efms0OBCTkJKHV8Api2PmMhPJ "
-    //example of query = "&q=cats "
-    var query = " ";
-    var queryURL = api + path + api_key + query;
+    //var api = "https://api.giphy.com";
+    // var path = "/v1/gifs/search?";
+    // var api_key = "&api_key=D0USeq9Efms0OBCTkJKHV8Api2PmMhPJ"
+    // var query = "&q=cats";
+    var queryURL = 'https://api.giphy.com/v1/gifs/search?&api_key=D0USeq9Efms0OBCTkJKHV8Api2PmMhPJ&q=cats';
+
     var limit = 10;
     var rating;
 
+    //creating a function by clicking on a button within div 'topics'
+    $('div.topics').on('click', function () {
+    
+      //key were generated for this project on giphy.com
+      //var api = "https://api.giphy.com";
+      // var path = "/v1/gifs/search?";
+      // var api_key = "&api_key=D0USeq9Efms0OBCTkJKHV8Api2PmMhPJ"
+      // var query = "&q=cats";
+      var topics = $('button').class();
+      alert($(this).class());
+      var queryURL = 'https://api.giphy.com/v1/gifs/search?&api_key=D0USeq9Efms0OBCTkJKHV8Api2PmMhPJ&q=' + topics;
 
-    //jquery method, but we do not selecting anythig here
-    $.ajax({                     
-      url: queryURL,
-      method: "GET "
-    }).then(function(response) {               //promice
-      console.log(response);                   //entire object comes back
-      console.log(response.Runtime);           //Runtime is a key from object: 88 min
-    });
+
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function (response) {
+        
+         
+        var imageUrl = response.data[0].images.original.url;
+        var altText = response.data.title;
+        $('.image').attr({src:imageUrl, alt:altText, width:'450', height:'450'})
+      });
+
+    })
 
 
 
 
-</script>
+
+  </script>
 
 </body>
 
