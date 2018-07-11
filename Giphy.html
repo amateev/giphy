@@ -27,11 +27,13 @@
 
     //creating animal(topics) buttons by looping the topics over:
     var topics = ['bears', 'cats', 'dogs', 'horses'];
+
     for (var i = 0; i < topics.length; i++) {
 
       var button = $('<button>');                     //new button
       var buttonText = button.addClass(topics[i]).text(topics[i]);        //text on the button
       $('.topics').append(buttonText);                //appending new button to div 'topics'
+      
     }
     //onclick function creats a new button with a user input as a text
     $('.userInput').on('click', function () {
@@ -45,7 +47,7 @@
 
     })
 
-    $('input').val = "";
+   
 
 
 
@@ -60,15 +62,15 @@
     var rating;
 
     //creating a function by clicking on a button within div 'topics'
-    $('div.topics').on('click', function () {
+    $('.topics').on('click', function () {
     
       //key were generated for this project on giphy.com
       //var api = "https://api.giphy.com";
       // var path = "/v1/gifs/search?";
       // var api_key = "&api_key=D0USeq9Efms0OBCTkJKHV8Api2PmMhPJ"
       // var query = "&q=cats";
-      var topics = $('button').class();
-      alert($(this).class());
+      var animal = $(this).text();
+   alert(animal);
       var queryURL = 'https://api.giphy.com/v1/gifs/search?&api_key=D0USeq9Efms0OBCTkJKHV8Api2PmMhPJ&q=' + topics;
 
 
